@@ -1,0 +1,44 @@
+/*comentario*/
+html{
+	font-family: "broadway";
+	font-Size: 30;
+	Text-align: center;
+	background-color: #D8BFD8;
+	color: white;
+}
+.par1
+{
+	Color: #008B8B;
+	padding: 20px 20px;
+	Font-size: 30px;
+	Margin: 2px;
+	Font-Family: Times New Roman;
+	border-radius: 50px;
+	
+}
+.par2
+{
+	Color: #5F9EA0;
+	padding: 20px 40px;
+	Font-size: 30px;
+	Margin: 2px;
+	Font-Family: Times New Roman;
+}
+.like
+{
+	Color: black;
+	padding: 20px 40px;
+	Font-size: 30px;
+	Margin: 2px;
+	Font-Family: Times New Roman;
+	border-radius: 20px;
+}
+.deslike
+{
+	Color: black;
+	padding: 20px 40px;
+	Font-size: 30px;
+	Margin: 2px;
+	Font-Family: Times New Roman;
+	border-radius: 20px;
+}

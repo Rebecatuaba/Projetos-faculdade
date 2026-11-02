@@ -1,0 +1,51 @@
+# Este codigo detecta rostos
+
+import cv2
+
+# Carrega o classificador pré-treinado para detectar rostos
+# Esse arquivo .xml contém as "regras" de como um rosto humano costuma parecer
+# (precisa estar na mesma pasta que este código)
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+
+# Abre a webcam (0 = câmera padrão do computador)
+cap = cv2.VideoCapture(0)
+
+# Loop que roda continuamente enquanto a câmera estiver aberta
+while True:
+    # Captura o frame da câmera
+    ret, frame = cap.read()
+
+    # Se a leitura falhar, sai do loop
+    if not ret:
+        break
+
+    # Converte o frame para tons de cinza
+    # O detector de rosto funciona melhor em imagens em preto e branco
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # Detecta rostos na imagem em tons de cinza
+    # O método detectMultiScale analisa a imagem em vários tamanhos (escala)
+    # e retorna uma lista de coordenadas (x, y, largura, altura) de cada rosto encontrado
+    faces = face_cascade.detectMultiScale(
+        gray,              # imagem em preto e branco
+        scaleFactor=1.1,   # quanto a imagem é reduzida em cada escala (ajuda a detectar rostos de tamanhos diferentes)
+        minNeighbors=5     # quantos vizinhos precisam confirmar que há um rosto (evita falsos positivos)
+    )
+
+    # Para cada rosto detectado, desenha um retângulo verde ao redor
+    for (x, y, w, h) in faces:
+        # Desenha o retângulo: (imagem, ponto inicial, ponto final, cor em BGR, espessura)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+    # Mostra o vídeo com os retângulos desenhados
+    cv2.imshow("Detecção de Rostos", frame)
+
+    # Espera 1 ms e verifica se a tecla ESC (27) foi pressionada
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
+
+# Libera a câmera (importante para não travar)
+cap.release()
+
+# Fecha todas as janelas abertas pelo OpenCV
+cv2.destroyAllWindows()
